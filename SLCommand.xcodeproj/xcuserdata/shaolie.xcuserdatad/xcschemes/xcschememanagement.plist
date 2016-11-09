@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>SEE.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>SLCommand.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>54F158541D95A2FC00D4048D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>54F158681D95A37100D4048D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
