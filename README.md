@@ -16,27 +16,15 @@ SLSourceEditorExtension 是我在使用 Xcode8 中根据平时的需求实现的
 安装很简单，只需要将 SLCommand 拖动到 应用程序（其他位置也可以） 内，并执行。然后就可以关闭了。接着重启Xcode。这时就能
 
 
-下面进行演示：
+下面进行演示：<p/>
 1. 打开 SLCommand 应用
-<p style="color:gray; text-align:center">
-<img src="./Sources/SLCommand.jpg" style="width:50%"/>
-SLCommand界面
-</p>
-
-2. CMD + q 退出应用
-
-3. 重新启动 Xcode
-
+![SLCommand界面](./Sources/SLCommand.jpg)
+2. CMD + q 退出应用<p/>
+3. 重新启动 Xcode<p/>
 4. 在 Xcode 菜单栏上的 Editor 上可以看到自定义的命令了
-<p style="color:gray; text-align:center">
-<img src="./Sources/查看自定义的命令.jpg" style="width:50%"/>
-查看自定义的命令
-</p>
+![查看自定义的命令](./Sources/查看自定义的命令.jpg)
+
 这里几个命令的快捷键是通过 Xcode -> Preferences -> Key Bindings 进行设置的，你也可以自定义成自己习惯的快捷键（注意不要和其他快捷键冲突了）。
 
 ###效果###
-<p style="color:gray; text-align:center">
-<img src="./Sources/Demonstration.gif" />
-效果演示
-</p>
-
+![效果演示](./Sources/Demonstration.gif)
