@@ -41,7 +41,11 @@ class NextToDoCommand: NSObject, XCSourceEditorCommand {
     
     func getTodoLineRange(with invocation: XCSourceEditorCommandInvocation) -> XCSourceTextRange? {
         let curCursor = invocation.buffer.selections.lastObject as! XCSourceTextRange
-        var lineSelection = self.getTodoRange(with: invocation, start: curCursor.end.line + 1, end: invocation.buffer.lines.count)
+        var start = curCursor.end.line
+        if start < invocation.buffer.lines.count {
+            start = start + 1
+        }
+        var lineSelection = self.getTodoRange(with: invocation, start: start, end: invocation.buffer.lines.count)
 
         if lineSelection == nil {
             lineSelection = self.getTodoRange(with: invocation, start: 0, end: invocation.buffer.lines.count)
