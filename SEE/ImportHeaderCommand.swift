@@ -23,7 +23,7 @@ class ImportHeaderCommand: NSObject, XCSourceEditorCommand {
             }
             let selectedLine = lines[lineRange.start.line] as! String
             
-            let range: Range<String.Index> = selectedLine.index(selectedLine.startIndex, offsetBy: lineRange.start.column) ..< selectedLine.index(selectedLine.startIndex, offsetBy: lineRange.end.column + 1)
+            let range: Range<String.Index> = selectedLine.index(selectedLine.startIndex, offsetBy: lineRange.start.column) ..< selectedLine.index(selectedLine.startIndex, offsetBy: lineRange.end.column)
             let subString = selectedLine.substring(with: range)
             
             let headerName = subString.trimmingCharacters(in: CharacterSet.whitespaces)

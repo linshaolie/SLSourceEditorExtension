@@ -23,30 +23,29 @@ class NextToDoCommand: NSObject, XCSourceEditorCommand {
         
     }
     
+    func getTodoRange(with invocation: XCSourceEditorCommandInvocation,
+                      start: Int, end: Int) -> XCSourceTextRange? {
+        for lineIndex in start ..< end {
+            let line = invocation.buffer.lines[lineIndex] as! String
+            let upperLine = line.trimmingCharacters(in: CharacterSet.whitespaces).uppercased()
+            if(upperLine.hasPrefix("//TODO") || upperLine.hasPrefix("// TODO")) {
+                let lineSelection = XCSourceTextRange()
+                lineSelection.start = XCSourceTextPosition(line: lineIndex, column: 0)
+                lineSelection.end = XCSourceTextPosition(line: lineIndex + 1, column: 0)
+                
+                return lineSelection
+            }
+        }
+        return nil
+    }
+    
     func getTodoLineRange(with invocation: XCSourceEditorCommandInvocation) -> XCSourceTextRange? {
         let curCursor = invocation.buffer.selections.lastObject as! XCSourceTextRange
-        for lineIndex in curCursor.end.line + 1 ..< invocation.buffer.lines.count {
-            let line = invocation.buffer.lines[lineIndex] as! String
-            if(line.trimmingCharacters(in: CharacterSet.whitespaces).uppercased().hasPrefix("//TODO")) {
-                let lineSelection = XCSourceTextRange()
-                lineSelection.start = XCSourceTextPosition(line: lineIndex, column: 0)
-                lineSelection.end = XCSourceTextPosition(line: lineIndex + 1, column: 0)
-                
-                return lineSelection
-            }
+        var lineSelection = self.getTodoRange(with: invocation, start: curCursor.end.line + 1, end: invocation.buffer.lines.count)
+
+        if lineSelection == nil {
+            lineSelection = self.getTodoRange(with: invocation, start: 0, end: invocation.buffer.lines.count)
         }
-        
-        for lineIndex in 0 ..< invocation.buffer.lines.count {
-            let line = invocation.buffer.lines[lineIndex] as! String
-            if(line.trimmingCharacters(in: CharacterSet.whitespaces).uppercased().hasPrefix("//TODO")) {
-                let lineSelection = XCSourceTextRange()
-                lineSelection.start = XCSourceTextPosition(line: lineIndex, column: 0)
-                lineSelection.end = XCSourceTextPosition(line: lineIndex + 1, column: 0)
-                
-                return lineSelection
-            }
-        }
-        
-        return nil
+        return lineSelection
     }
 }
