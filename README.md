@@ -4,7 +4,8 @@ Xcode8 出来后，使用插件变得困难。不过苹果提供了新的渠道�
 SLSourceEditorExtension 是我在使用 Xcode8 中根据平时的需求实现的几个插件，目前有：
 1. 注释和解注释；
 2. 在当前文件查找TODO；
-3. 非智能化自动导入头文件。
+3. 非智能化自动导入头文件;
+4. 根据所给的 Json 生成一个 OC Class Modal
 
 由于 Xcode8 的注释命令经常失灵，所以自己实现了一个插件，当 Xcode8 失灵的时候，就能用自己的插件啦，效率杠杠的。
 
@@ -28,3 +29,5 @@ SLSourceEditorExtension 是我在使用 Xcode8 中根据平时的需求实现的
 
 ###效果###
 ![效果演示](./Sources/Demonstration.gif)
+
+![JsonToClass演示](./Sources/DemoJsonToClass.gif)
