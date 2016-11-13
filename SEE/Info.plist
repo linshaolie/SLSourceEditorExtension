@@ -52,6 +52,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>Next ToDo</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).JsonToClassCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).JsonToClassCommand</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>Json To Class</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>

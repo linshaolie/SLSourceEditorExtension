@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		540B87671DD6016800156D26 /* JsonToClassCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540B87661DD6016800156D26 /* JsonToClassCommand.swift */; };
 		5419F3801DD2CCFE00AD954A /* CommentSelectionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F37D1DD2CCFE00AD954A /* CommentSelectionCommand.swift */; };
 		5419F3811DD2CCFE00AD954A /* ImportHeaderCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F37E1DD2CCFE00AD954A /* ImportHeaderCommand.swift */; };
 		5419F3821DD2CCFE00AD954A /* NextToDoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F37F1DD2CCFE00AD954A /* NextToDoCommand.swift */; };
@@ -43,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		540B87661DD6016800156D26 /* JsonToClassCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToClassCommand.swift; sourceTree = "<group>"; };
+		540B87681DD6020700156D26 /* json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = json.json; sourceTree = "<group>"; };
 		5419F37D1DD2CCFE00AD954A /* CommentSelectionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSelectionCommand.swift; sourceTree = "<group>"; };
 		5419F37E1DD2CCFE00AD954A /* ImportHeaderCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportHeaderCommand.swift; sourceTree = "<group>"; };
 		5419F37F1DD2CCFE00AD954A /* NextToDoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextToDoCommand.swift; sourceTree = "<group>"; };
@@ -122,8 +125,10 @@
 				5419F37D1DD2CCFE00AD954A /* CommentSelectionCommand.swift */,
 				5419F37E1DD2CCFE00AD954A /* ImportHeaderCommand.swift */,
 				5419F37F1DD2CCFE00AD954A /* NextToDoCommand.swift */,
+				540B87661DD6016800156D26 /* JsonToClassCommand.swift */,
 				54F158741D95A37100D4048D /* Info.plist */,
 				54F1586E1D95A37100D4048D /* Supporting Files */,
+				540B87681DD6020700156D26 /* json.json */,
 			);
 			path = SEE;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				54F158711D95A37100D4048D /* SourceEditorExtension.swift in Sources */,
 				5419F3821DD2CCFE00AD954A /* NextToDoCommand.swift in Sources */,
 				5419F3801DD2CCFE00AD954A /* CommentSelectionCommand.swift in Sources */,
+				540B87671DD6016800156D26 /* JsonToClassCommand.swift in Sources */,
 				5419F3811DD2CCFE00AD954A /* ImportHeaderCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

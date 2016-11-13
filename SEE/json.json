@@ -1,0 +1,28 @@
+{
+    "userId": "111111",
+    "name": "linshaolie",
+    "age":  24,
+    "skillLevel": {
+        "Objective-C": 8,
+        "JavaScript":  8,
+    },
+    "friends": [
+        {
+            "userId": "222222",
+            "name": "lin",
+            "age": 13
+        },
+        {
+            "userId": "333333",
+            "name": "shao",
+            "age": 24
+        },
+        {
+            "userId": "444444",
+            "name": "lie",
+            "age": 25
+        }
+    ],
+    "luckyNumber": [3, 7, 8, 21],
+    "flag":  true
+}
