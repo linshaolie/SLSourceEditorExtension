@@ -1,4 +1,4 @@
-#SLSourceEditorExtension#
+# SLSourceEditorExtension
 
 Xcode8 出来后，使用插件变得困难。不过苹果提供了新的渠道让开发者开发简单的文本插件 SourceEditorExtension。
 SLSourceEditorExtension 是我在使用 Xcode8 中根据平时的需求实现的几个插件，目前有：
@@ -15,7 +15,7 @@ SLSourceEditorExtension 是我在使用 Xcode8 中根据平时的需求实现的
 
 在开发中，网络请求回来的数据格式基本上都是json，我们需要对齐建立相应的 Modal 类，Json To Class 命令，能根据所给的 json，快速生成一个对呀的 Modal 类。再也不用一句一句的定义Modal了。
 
-###怎么安装插件###
+### 怎么安装插件
 安装很简单，只需要将 SLCommand 拖动到 应用程序（其他位置也可以） 内，并执行。然后就可以关闭了。接着重启Xcode。这时就能
 
 
@@ -29,7 +29,7 @@ SLSourceEditorExtension 是我在使用 Xcode8 中根据平时的需求实现的
 
 这里几个命令的快捷键是通过 Xcode -> Preferences -> Key Bindings 进行设置的，你也可以自定义成自己习惯的快捷键（注意不要和其他快捷键冲突了）。
 
-###效果###
+### 效果
 ![效果演示](./Sources/Demonstration.gif)
 
 ![JsonToClass演示](./Sources/DemoJsonToClass.gif)
