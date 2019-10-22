@@ -9,69 +9,98 @@
 import Cocoa
 import XcodeKit
 
+enum LanguageType : String {
+    case swift = "swift"
+    case objc = "obj-c"
+}
+
+
 class ImportHeaderCommand: NSObject, XCSourceEditorCommand {
+    var languageType: LanguageType = .swift
+    
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void) {
+        self.languageType = self.getLanguageType(invocation)
         
-        //获取行
-        let lines = invocation.buffer.lines;
-        let lineRange = invocation.buffer.selections[0] as! XCSourceTextRange
+        //获取选择行区间
+        let lineRange = invocation.buffer.selections.firstObject as! XCSourceTextRange
         
-        // 1. 异常判断（是否有选中）
+        // 异常判断（是否有选中）
         if lineRange.start.line == lineRange.end.line &&
             lineRange.start.column == lineRange.end.column {
             completionHandler(NSError(domain: "have not selections line", code: -1, userInfo: nil))
             return;
         }
         
-        // 2. 拿到选择的字符串
-        let selectedLine = lines[lineRange.start.line] as! String
-        let endOffset = min(max(lineRange.start.column, lineRange.end.column), (selectedLine as NSString).length - 1)
-        let range: Range<String.Index> = selectedLine.index(selectedLine.startIndex, offsetBy: lineRange.start.column) ..< selectedLine.index(selectedLine.startIndex, offsetBy:  endOffset)
-        let subString = String(selectedLine[range])
+        let lines = invocation.buffer.lines
+        // 获取选择的字符串
+        let selectionString = self.getSelectionString(lines: lines, lineRange: lineRange)
         
-        let headerName = subString.trimmingCharacters(in: CharacterSet.whitespaces)
+        // 获取插入位置
+        let headerName = self.getHeaderName(key: selectionString)
+        self.importHeader(lines: lines, headerName: headerName)
         
-        // 3. 获取插入位置
+        completionHandler(nil)
+    }
+    
+    private func importHeader(lines: NSMutableArray, headerName: String) {
         let importLineIndex = self.getLastImportIndex(lines: lines)
-        if importLineIndex < invocation.buffer.lines.count {
-            var importString: String
-            // 4. 开发语言类型判断
-            switch self.getLanguageType(invocation.buffer.lines[importLineIndex] as! String) {
-                case "obj-c":
-                    importString = "#import " + "\"" + headerName + ".h\"" + "\n"
-                case "swift":
-                    importString = "import " + headerName + "\n"
-                default:
-                    importString = ""
-            }
-            
-            // 5. 插入头文件引入
-            invocation.buffer.lines.insert(importString as NSString, at: importLineIndex + 1)
+        var importString: String
+        switch self.languageType {
+            case .objc:
+                importString = "#import " + headerName + "\n"
+            default:
+                importString = "import " + headerName + "\n"
         }
         
-        // 6. 回调
-        completionHandler(nil)
-        
+        // 插入头文件引入
+        lines.insert(importString, at: importLineIndex)
+    }
+    
+    private func getSelectionString(lines: NSArray, lineRange: XCSourceTextRange) -> String {
+        let selectedLine = lines[lineRange.start.line] as! String
+        let endOffset = min(max(lineRange.start.column, lineRange.end.column), selectedLine.count - 1)
+        let range: Range<String.Index> = selectedLine.index(selectedLine.startIndex, offsetBy: lineRange.start.column) ..< selectedLine.index(selectedLine.startIndex, offsetBy:  endOffset)
+        return String(selectedLine[range])
     }
     
     private func getLastImportIndex(lines: NSArray) -> Int {
-        for i in 0 ..< lines.count {
-            let line = lines[lines.count - 1 - i] as! String
-            if isImportType(line: line) {
-                return lines.count - 1 - i
+        for (index, line) in lines.enumerated() {
+            if isImportLine(line: line as! String) {
+                return index
             }
         }
-        return 0;
+        return 0
     }
     
-    private func isImportType(line: String) -> Bool {
+    private func isImportLine(line: String) -> Bool {
         return line.hasPrefix("#import") || line.hasPrefix("import")
     }
     
-    private func getLanguageType(_ line: String) -> String {
-        if line.hasPrefix("#") {
-            return "obj-c"
+    private func getLanguageType(_ invocation: XCSourceEditorCommandInvocation) -> LanguageType {
+        let buffer = invocation.buffer.completeBuffer
+        if buffer.contains("#import") || buffer.contains("@interface") || buffer.contains("@implementation") {
+            return .objc
         }
-        return "swift"
+        return .swift
+    }
+
+    private func getHeaderName(key: String) -> String {
+        let heaerName = key.trimmingCharacters(in: CharacterSet.whitespaces)
+        switch self.languageType {
+        case .objc:
+            if key.hasPrefix("UI") {
+                return "<UIKit/UIKit.h>"
+            } else if key.hasPrefix("NS") {
+                return "<Foundation/Foundation.h>"
+            }
+            return "\"\(heaerName).h\""
+        default:
+            if key.hasPrefix("UI") {
+                return "UIKit"
+            } else if key.hasPrefix("NS") {
+                return "Foundation"
+            }
+            return heaerName
+        }
     }
 }
